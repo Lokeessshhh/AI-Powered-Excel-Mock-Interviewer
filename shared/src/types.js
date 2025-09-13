@@ -1,3 +1,4 @@
+// shared/types.ts
 export interface Question {
   id: string
   text: string
@@ -5,7 +6,7 @@ export interface Question {
   difficulty: 'beginner' | 'intermediate' | 'advanced'
   expectedAnswer: string
   keywords: string[]
-  hints?: string[]
+  hints: string[]
 }
 
 export interface Answer {
@@ -13,16 +14,34 @@ export interface Answer {
   text: string
   submittedAt: Date
   attempt: number
+  timeSpent?: number
+}
+
+export interface QuestionScore {
+  questionId: string
+  score: number
+  feedback: string
+  strengths: string[]
+  improvements: string[]
+}
+
+export interface SessionEvaluation {
+  sessionId: string
+  overallScore: number
+  questionScores: QuestionScore[]
+  completedAt: Date
+  feedback: string
+  recommendations: string[]
 }
 
 export interface EvaluationResult {
-  correct: boolean
-  score: number // 0-100
+  score: number
+  pass: boolean
   feedback: string
-  followUps?: string[]
-  keywordMatches: string[]
-  missingConcepts: string[]
+  followUps: string[]
 }
+
+export type SessionStatus = 'in_progress' | 'completed' | 'paused' | 'expired'
 
 export interface Session {
   id: string
@@ -30,17 +49,9 @@ export interface Session {
   questions: Question[]
   currentQuestionIndex: number
   answers: Answer[]
-  evaluations: EvaluationResult[]
-  status: 'active' | 'completed' | 'abandoned'
-  createdAt: Date
+  evaluation?: SessionEvaluation | null
+  status: SessionStatus
+  startedAt: Date
   completedAt?: Date
   overallScore?: number
-}
-
-export interface SessionAttempt {
-  questionId: string
-  answers: Answer[]
-  evaluations: EvaluationResult[]
-  completed: boolean
-  bestScore: number
 }

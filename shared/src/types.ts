@@ -29,6 +29,13 @@ export interface QuestionScore {
   improvements: string[]
 }
 
+export interface EvaluationResult {
+  score: number // 0-100
+  pass: boolean
+  feedback: string
+  followUps: string[]
+}
+
 export interface Evaluation {
   sessionId: string
   overallScore: number // 0-100
