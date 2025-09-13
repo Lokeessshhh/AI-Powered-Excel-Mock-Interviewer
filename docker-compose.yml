@@ -1,0 +1,25 @@
+{
+  "name": "ai-excel-interviewer",
+  "version": "1.0.0",
+  "description": "AI-Powered Excel Mock Interviewer PoC",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "docker-compose up -d",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "clean": "docker-compose down && npm run clean --workspaces",
+    "install:all": "npm install && npm install --workspaces"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
